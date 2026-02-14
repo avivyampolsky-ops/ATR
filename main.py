@@ -19,8 +19,10 @@ def main(data_path, out_dir, config_path):
     if data_streamer.ref is None:
         return
 
-    reference_window_ms = float(config.get("registration.reference_window_ms", 500.0))
-    reference_window_frames = max(1, int(round(data_streamer.fps * (reference_window_ms / 1000.0))))
+    reference_window_frames = int(config.get("registration.reference_window_frames", -1))
+    if reference_window_frames <= 0:
+        reference_window_ms = float(config.get("registration.reference_window_ms", 500.0))
+        reference_window_frames = max(1, int(round(data_streamer.fps * (reference_window_ms / 1000.0))))
     config.set_runtime("registration.reference_window_frames", reference_window_frames)
     config.set_runtime("detection.learning_rate", min(1.0, 1.0 / reference_window_frames))
     

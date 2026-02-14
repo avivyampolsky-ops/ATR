@@ -18,6 +18,7 @@ registration:
   mode: homography  # "homography" or "translation"
   downscale_factor: 0.75
   reference_window_ms: 500.0
+  reference_window_frames: 20
   homography:
     feature_extractor: FAST_BRIEF  # ORB, FAST_BRIEF, AKAZE, BRISK, SIFT
     matcher: KNN  # BF, FLANN, KNN
